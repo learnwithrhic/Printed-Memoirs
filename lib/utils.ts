@@ -15,17 +15,33 @@ export function getTierForQuantity(quantity: number): PricingTier {
   return PRICING_TIERS[0]
 }
 
-export function calculateUnitPrice(productType: 'pin' | 'magnet' | 'mirror', quantity: number): number {
-  const product = PRODUCTS.find((p) => p.type === productType)
-  const basePrice = product ? product.basePriceAED : 15
-  const tier = getTierForQuantity(quantity)
-  const discountedPrice = basePrice * (1 - tier.discountPercentage / 100)
-  return Math.round(discountedPrice * 100) / 100
+export function calculateUnitPrice(
+  productType: 'pin' | 'magnet' | 'mirror' | 'collage',
+  quantity: number = 1,
+  shapeOption?: string
+): number {
+  const product = PRODUCTS.find((p) => p.type === productType);
+  let basePrice = product ? product.basePriceAED : 15;
+
+  if (productType === 'collage' && shapeOption) {
+    if (shapeOption.includes('2×3') || shapeOption.includes('2x3')) basePrice = 65;
+    else if (shapeOption.includes('3×3') || shapeOption.includes('3x3')) basePrice = 90;
+    else if (shapeOption.includes('3×4') || shapeOption.includes('3x4')) basePrice = 115;
+    else if (shapeOption.includes('4×4') || shapeOption.includes('4x4')) basePrice = 140;
+  }
+
+  const tier = getTierForQuantity(quantity);
+  const discountedPrice = basePrice * (1 - tier.discountPercentage / 100);
+  return Math.round(discountedPrice * 100) / 100;
 }
 
-export function calculateTotalPrice(productType: 'pin' | 'magnet' | 'mirror', quantity: number): number {
-  const unitPrice = calculateUnitPrice(productType, quantity)
-  return Math.round(unitPrice * quantity * 100) / 100
+export function calculateTotalPrice(
+  productType: 'pin' | 'magnet' | 'mirror' | 'collage',
+  quantity: number = 1,
+  shapeOption?: string
+): number {
+  const unitPrice = calculateUnitPrice(productType, quantity, shapeOption);
+  return Math.round(unitPrice * quantity * 100) / 100;
 }
 
 export function formatAED(amount: number): string {

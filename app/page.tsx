@@ -28,8 +28,8 @@ export default function Home() {
   const [quickQuoteDrawerOpen, setQuickQuoteDrawerOpen] = useState<boolean>(false);
 
   // Custom Order pre-filled state
-  const [quoteProduct, setQuoteProduct] = useState<'pin' | 'magnet' | 'mirror'>('pin');
-  const [quoteShape, setQuoteShape] = useState<'Round' | 'Square'>('Round');
+  const [quoteProduct, setQuoteProduct] = useState<'pin' | 'magnet' | 'mirror' | 'collage'>('pin');
+  const [quoteShape, setQuoteShape] = useState<string>('65mm Round');
   const [quoteQuantity, setQuoteQuantity] = useState<number>(10);
 
   useEffect(() => {
@@ -56,8 +56,8 @@ export default function Home() {
   };
 
   const handleSelectProductForQuote = (
-    productType: 'pin' | 'magnet' | 'mirror',
-    shape: 'Round' | 'Square' = 'Round',
+    productType: 'pin' | 'magnet' | 'mirror' | 'collage',
+    shape: string = '65mm Round',
     quantity: number = 10
   ) => {
     setQuoteProduct(productType);

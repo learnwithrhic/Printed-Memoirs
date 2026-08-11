@@ -6,19 +6,28 @@ import { PRODUCTS, ProductItem } from '@/lib/data';
 import { formatAED, calculateUnitPrice } from '@/lib/utils';
 
 interface ProductShopProps {
-  onSelectProductForQuote: (productType: 'pin' | 'magnet' | 'mirror', shape?: 'Round' | 'Square') => void;
+  onSelectProductForQuote: (productType: 'pin' | 'magnet' | 'mirror' | 'collage', shape?: string) => void;
   onOpenStudio: () => void;
 }
 
 export function ProductShop({ onSelectProductForQuote, onOpenStudio }: ProductShopProps) {
-  const [selectedShapes, setSelectedShapes] = useState<Record<string, 'Round' | 'Square'>>({
-    pin: 'Round',
-    magnet: 'Square',
-    mirror: 'Round',
+  const [selectedShapes, setSelectedShapes] = useState<Record<string, string>>({
+    pin: '65mm Round',
+    magnet: '65mm Round',
+    mirror: '65mm Round',
+    collage: '2×3 Grid (6 Pcs)',
   });
 
-  const handleShapeToggle = (productId: string, shape: 'Round' | 'Square') => {
+  const handleShapeToggle = (productId: string, shape: string) => {
     setSelectedShapes((prev) => ({ ...prev, [productId]: shape }));
+  };
+
+  const getGridColsRows = (shapeStr: string) => {
+    if (shapeStr.includes('2×3') || shapeStr.includes('2x3')) return { cols: 2, rows: 3 };
+    if (shapeStr.includes('3×3') || shapeStr.includes('3x3')) return { cols: 3, rows: 3 };
+    if (shapeStr.includes('3×4') || shapeStr.includes('3x4')) return { cols: 3, rows: 4 };
+    if (shapeStr.includes('4×4') || shapeStr.includes('4x4')) return { cols: 4, rows: 4 };
+    return { cols: 2, rows: 3 };
   };
 
   return (
@@ -28,22 +37,26 @@ export function ProductShop({ onSelectProductForQuote, onOpenStudio }: ProductSh
         {/* Section Title Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs font-bold uppercase tracking-widest text-[#C86D51] mb-2 block">
-            Our Catalog & Keepsake Options
+            Our Catalog & Product Specifications
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#362C2B] tracking-tight mb-4">
-            Small Keepsakes. Big Memories.
+            Custom Shapes & Exact Dimensions
           </h2>
           <p className="text-base sm:text-lg text-[#5C4D4A] leading-relaxed">
-            Choose from custom pins, photo magnets, and personalized pocket mirrors in both Round and Square shapes.
+            Crafted with precision. Explore 65mm round pins & mirrors, 58mm/50mm square magnets, and multi-piece photo puzzle collages.
           </p>
         </div>
 
         {/* Detailed Product Showcase Sections */}
         <div className="space-y-16">
           {PRODUCTS.map((product, idx) => {
-            const currentShape = selectedShapes[product.id] || 'Round';
-            const unitPrice = calculateUnitPrice(product.type, 1);
+            const currentShape = selectedShapes[product.id] || product.shapes[0];
+            const unitPrice = calculateUnitPrice(product.type, 1, currentShape);
             const isEven = idx % 2 === 0;
+            const isCollage = product.type === 'collage';
+            const isSquare58 = currentShape.includes('58mm');
+            const isSquare50 = currentShape.includes('50mm Square');
+            const isRound = currentShape.includes('Round');
 
             return (
               <div
@@ -60,41 +73,84 @@ export function ProductShop({ onSelectProductForQuote, onOpenStudio }: ProductSh
                       
                       {/* Product Visual Container */}
                       <div className="relative w-full aspect-square max-w-[280px] my-4 flex items-center justify-center">
-                        <div className={`relative transition-all duration-300 w-56 h-56 bg-white shadow-xl border-4 border-[#EAE2D5] overflow-hidden flex items-center justify-center ${
-                          currentShape === 'Round' ? 'rounded-full' : 'rounded-3xl'
-                        }`}>
-                          <img
-                            src={product.image}
-                            alt={`${product.name} ${currentShape}`}
-                            className="w-full h-full object-cover"
-                            referrerPolicy="no-referrer"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-white/10 pointer-events-none" />
-                        </div>
+                        {isCollage ? (
+                          /* Interactive Collage Puzzle Visual Grid */
+                          (() => {
+                            const { cols, rows } = getGridColsRows(currentShape);
+                            return (
+                              <div 
+                                className="relative w-56 h-56 bg-white shadow-xl border-4 border-[#EAE2D5] overflow-hidden grid gap-1 p-1 bg-amber-900/10 rounded-xl"
+                                style={{
+                                  gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+                                  gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))`,
+                                }}
+                              >
+                                {Array.from({ length: cols * rows }).map((_, i) => {
+                                  const colIdx = i % cols;
+                                  const rowIdx = Math.floor(i / cols);
+                                  return (
+                                    <div
+                                      key={i}
+                                      className="relative overflow-hidden rounded-xs border border-white/60 shadow-2xs group"
+                                    >
+                                      <img
+                                        src={product.image}
+                                        alt={`Piece ${i + 1}`}
+                                        className="absolute w-56 h-56 max-w-none object-cover"
+                                        style={{
+                                          left: `-${colIdx * (224 / cols)}px`,
+                                          top: `-${rowIdx * (224 / rows)}px`,
+                                        }}
+                                        referrerPolicy="no-referrer"
+                                      />
+                                      <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            );
+                          })()
+                        ) : (
+                          /* Standard Single Item Visual */
+                          <div className={`relative transition-all duration-300 w-56 h-56 bg-white shadow-xl border-4 border-[#EAE2D5] overflow-hidden flex items-center justify-center ${
+                            isRound ? 'rounded-full' : isSquare58 ? 'rounded-3xl' : 'rounded-md'
+                          }`}>
+                            <img
+                              src={product.image}
+                              alt={`${product.name} ${currentShape}`}
+                              className="w-full h-full object-cover"
+                              referrerPolicy="no-referrer"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-white/10 pointer-events-none" />
+                          </div>
+                        )}
                         
                         {/* Shape Indicator Badge */}
-                        <div className="absolute bottom-2 bg-black/75 backdrop-blur-xs text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                          {currentShape} {product.type.toUpperCase()}
+                        <div className="absolute bottom-2 bg-black/80 backdrop-blur-xs text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                          {currentShape}
                         </div>
                       </div>
 
-                      {/* Interactive Shape Picker Switcher */}
+                      {/* Interactive Size/Shape Picker Switcher */}
                       <div className="w-full mt-4">
                         <p className="text-xs font-bold text-[#8C7A78] uppercase tracking-wider mb-2">
-                          Available Shapes:
+                          Available Specs & Dimensions:
                         </p>
-                        <div className="grid grid-cols-2 gap-2 bg-white p-1.5 rounded-2xl border border-[#EAE2D5]">
+                        <div className={`grid gap-1.5 bg-white p-2 rounded-2xl border border-[#EAE2D5] ${
+                          product.shapes.length > 2 ? 'grid-cols-1 sm:grid-cols-1' : 'grid-cols-1'
+                        }`}>
                           {product.shapes.map((shape) => (
                             <button
                               key={shape}
                               onClick={() => handleShapeToggle(product.id, shape)}
-                              className={`py-2 px-3 text-xs font-bold rounded-xl transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C86D51] ${
+                              className={`py-2 px-3 text-xs font-bold rounded-xl transition-all duration-150 text-left flex items-center justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C86D51] ${
                                 currentShape === shape
                                   ? 'bg-[#C86D51] text-white shadow-2xs'
                                   : 'text-[#5C4D4A] hover:bg-[#FAF7F2]'
                               }`}
                             >
-                              {shape === 'Round' ? '🟢 Round (58mm)' : '⬛ Square (50mm)'}
+                              <span>{shape}</span>
+                              <Check className={`w-3.5 h-3.5 ${currentShape === shape ? 'opacity-100' : 'opacity-0'}`} />
                             </button>
                           ))}
                         </div>
@@ -106,7 +162,7 @@ export function ProductShop({ onSelectProductForQuote, onOpenStudio }: ProductSh
                         className="mt-4 text-xs font-bold text-[#C86D51] hover:text-[#B25C42] flex items-center justify-center cursor-pointer"
                       >
                         <Sparkles className="w-3.5 h-3.5 mr-1" aria-hidden="true" />
-                        Test your design in 3D simulator →
+                        Preview in Interactive Studio →
                       </button>
 
                     </div>
@@ -134,7 +190,7 @@ export function ProductShop({ onSelectProductForQuote, onOpenStudio }: ProductSh
                     {/* Perfect For List */}
                     <div className="mb-8 bg-[#FAF7F2] p-5 rounded-2xl border border-[#EAE2D5]">
                       <h4 className="text-xs font-bold uppercase tracking-wider text-[#362C2B] mb-3">
-                        Perfect For:
+                        Ideal Uses & Applications:
                       </h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                         {product.perfectFor.map((item, i) => (
@@ -149,12 +205,14 @@ export function ProductShop({ onSelectProductForQuote, onOpenStudio }: ProductSh
                     {/* Pricing & CTA */}
                     <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between pt-4 border-t border-[#EAE2D5] gap-4">
                       <div>
-                        <span className="text-xs text-[#8C7A78] block font-medium">Standard Pricing</span>
+                        <span className="text-xs text-[#8C7A78] block font-medium">
+                          {isCollage ? 'Selected Grid Pricing' : 'Standard Pricing'}
+                        </span>
                         <span className="text-2xl font-serif font-bold text-[#362C2B]">
-                          {formatAED(unitPrice)} <span className="text-xs font-normal text-[#5C4D4A]">/ piece</span>
+                          {formatAED(unitPrice)} <span className="text-xs font-normal text-[#5C4D4A]">{isCollage ? '/ grid set' : '/ piece'}</span>
                         </span>
                         <span className="text-[11px] text-[#C86D51] font-semibold block">
-                          Bulk discounts up to 40% off for 10+ pcs
+                          Tiered bulk discounts available up to 40% off
                         </span>
                       </div>
 
@@ -163,9 +221,10 @@ export function ProductShop({ onSelectProductForQuote, onOpenStudio }: ProductSh
                         className="inline-flex items-center justify-center px-6 py-3 text-sm font-bold text-white bg-[#C86D51] hover:bg-[#B25C42] rounded-full shadow-sm hover:shadow transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C86D51] focus-visible:ring-offset-2 min-h-[44px]"
                       >
                         <Sparkles className="w-4 h-4 mr-2" aria-hidden="true" />
-                        {product.type === 'pin' && 'Get a Quote'}
-                        {product.type === 'magnet' && 'Customize Your Magnet'}
-                        {product.type === 'mirror' && 'Create Your Mirror'}
+                        {product.type === 'pin' && 'Order 65mm Round Pin'}
+                        {product.type === 'magnet' && 'Customize Magnet'}
+                        {product.type === 'mirror' && 'Order 65mm Round Mirror'}
+                        {product.type === 'collage' && 'Customize Collage Set'}
                       </button>
                     </div>
 

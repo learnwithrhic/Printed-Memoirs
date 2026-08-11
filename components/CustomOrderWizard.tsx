@@ -10,8 +10,8 @@ import { PRODUCTS, PRESET_SAMPLE_ARTWORK } from '@/lib/data';
 import { calculateUnitPrice, calculateTotalPrice, formatAED, buildWhatsAppLink, getTierForQuantity } from '@/lib/utils';
 
 interface CustomOrderWizardProps {
-  initialProduct?: 'pin' | 'magnet' | 'mirror';
-  initialShape?: 'Round' | 'Square';
+  initialProduct?: 'pin' | 'magnet' | 'mirror' | 'collage';
+  initialShape?: string;
   initialQuantity?: number;
   onOrderSubmitted?: (orderData: any) => void;
 }
@@ -24,13 +24,13 @@ function generateOrderId() {
 
 export function CustomOrderWizard({
   initialProduct = 'pin',
-  initialShape = 'Round',
+  initialShape = '65mm Round',
   initialQuantity = 10,
   onOrderSubmitted,
 }: CustomOrderWizardProps) {
   const [currentStep, setCurrentStep] = useState<number>(1);
-  const [product, setProduct] = useState<'pin' | 'magnet' | 'mirror'>(initialProduct);
-  const [shape, setShape] = useState<'Round' | 'Square'>(initialShape);
+  const [product, setProduct] = useState<'pin' | 'magnet' | 'mirror' | 'collage'>(initialProduct);
+  const [shape, setShape] = useState<string>(initialShape);
   const [quantity, setQuantity] = useState<number>(initialQuantity);
   
   // Design state
@@ -62,9 +62,20 @@ export function CustomOrderWizard({
     return () => clearTimeout(timer);
   }, [initialProduct, initialShape, initialQuantity]);
 
-  const unitPrice = calculateUnitPrice(product, quantity);
-  const totalPrice = calculateTotalPrice(product, quantity);
+  const unitPrice = calculateUnitPrice(product, quantity, shape);
+  const totalPrice = calculateTotalPrice(product, quantity, shape);
   const currentTier = getTierForQuantity(quantity);
+
+  const handleProductSelect = (pType: 'pin' | 'magnet' | 'mirror' | 'collage') => {
+    setProduct(pType);
+    if (pType === 'pin' || pType === 'mirror') {
+      setShape('65mm Round');
+    } else if (pType === 'magnet') {
+      setShape('65mm Round');
+    } else if (pType === 'collage') {
+      setShape('2×3 Grid (6 Pcs)');
+    }
+  };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -264,28 +275,28 @@ export function CustomOrderWizard({
               {currentStep === 1 && (
                 <div className="space-y-6 animate-in fade-in duration-200">
                   <h3 className="font-serif text-2xl font-bold text-[#362C2B]">
-                    Step 1 — Choose Your Product
+                    Step 1 — Choose Your Product Category
                   </h3>
                   
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {PRODUCTS.map((p) => {
                       const isSelected = product === p.type;
                       return (
                         <div
                           key={p.id}
-                          onClick={() => setProduct(p.type)}
-                          className={`p-6 rounded-2xl border-2 cursor-pointer transition-all duration-200 flex flex-col items-center text-center ${
+                          onClick={() => handleProductSelect(p.type)}
+                          className={`p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 flex flex-col items-center text-center ${
                             isSelected
                               ? 'border-[#C86D51] bg-[#FAF7F2] shadow-md ring-2 ring-[#C86D51]/20'
                               : 'border-[#EAE2D5] hover:border-[#C86D51]/50 bg-white'
                           }`}
                         >
-                          <span className="text-4xl mb-3">{p.emoji}</span>
-                          <span className="font-bold text-[#362C2B] text-base mb-1">
-                            {p.name.replace('CUSTOM ', '')}
+                          <span className="text-3xl mb-2">{p.emoji}</span>
+                          <span className="font-bold text-[#362C2B] text-sm mb-1">
+                            {p.name}
                           </span>
-                          <span className="text-xs text-[#5C4D4A] mb-3">{p.tagline}</span>
-                          <span className="mt-auto text-xs font-bold text-[#C86D51] bg-white px-3 py-1 rounded-full border border-[#EAE2D5]">
+                          <span className="text-[11px] text-[#5C4D4A] mb-3 leading-snug">{p.tagline}</span>
+                          <span className="mt-auto text-xs font-bold text-[#C86D51] bg-white px-2.5 py-1 rounded-full border border-[#EAE2D5]">
                             From {formatAED(p.basePriceAED)}
                           </span>
                         </div>
@@ -299,50 +310,164 @@ export function CustomOrderWizard({
                       onClick={() => setCurrentStep(2)}
                       className="px-8 py-3.5 bg-[#C86D51] hover:bg-[#B25C42] text-white font-bold rounded-full shadow-md flex items-center min-h-[44px]"
                     >
-                      Next: Choose Shape
+                      Next: Choose Shape & Size
                       <ArrowRight className="w-4 h-4 ml-2" aria-hidden="true" />
                     </button>
                   </div>
                 </div>
               )}
 
-              {/* STEP 2: CHOOSE YOUR SHAPE */}
+              {/* STEP 2: CHOOSE YOUR SHAPE & SIZE */}
               {currentStep === 2 && (
                 <div className="space-y-6 animate-in fade-in duration-200">
-                  <h3 className="font-serif text-2xl font-bold text-[#362C2B]">
-                    Step 2 — Choose Your Shape
-                  </h3>
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-serif text-2xl font-bold text-[#362C2B]">
+                      Step 2 — Select Shape & Dimensions
+                    </h3>
+                    <span className="text-xs font-bold text-[#C86D51] bg-[#FAF7F2] px-3 py-1 rounded-full border border-[#EAE2D5] uppercase">
+                      For {product.toUpperCase()}
+                    </span>
+                  </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div
-                      onClick={() => setShape('Round')}
-                      className={`p-6 rounded-2xl border-2 cursor-pointer transition-all flex flex-col items-center text-center ${
-                        shape === 'Round'
-                          ? 'border-[#C86D51] bg-[#FAF7F2] shadow-md ring-2 ring-[#C86D51]/20'
-                          : 'border-[#EAE2D5] hover:border-[#C86D51]/50 bg-white'
-                      }`}
-                    >
-                      <div className="w-24 h-24 rounded-full bg-white border-4 border-[#EAE2D5] flex items-center justify-center shadow-inner mb-4">
-                        <span className="text-2xl font-bold text-[#362C2B]">58 mm</span>
+                  <div className={`grid gap-4 ${
+                    product === 'collage' || product === 'magnet' ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'
+                  }`}>
+                    {/* Render Shapes for Pin & Mirror */}
+                    {(product === 'pin' || product === 'mirror') && (
+                      <div
+                        onClick={() => setShape('65mm Round')}
+                        className="p-6 rounded-2xl border-2 border-[#C86D51] bg-[#FAF7F2] shadow-md ring-2 ring-[#C86D51]/20 cursor-pointer flex flex-col items-center text-center"
+                      >
+                        <div className="w-24 h-24 rounded-full bg-white border-4 border-[#EAE2D5] flex items-center justify-center shadow-inner mb-4">
+                          <span className="text-xl font-bold text-[#362C2B]">65 mm</span>
+                        </div>
+                        <span className="font-bold text-[#362C2B] text-lg mb-1">65mm Round</span>
+                        <p className="text-xs text-[#5C4D4A]">Standard premium circular format. Perfect for wearable pins and compact hand mirrors.</p>
                       </div>
-                      <span className="font-bold text-[#362C2B] text-lg mb-1">Round Shape</span>
-                      <p className="text-xs text-[#5C4D4A]">Classic circular layout. Perfect for logos, circular monograms, portraits, and quotes.</p>
-                    </div>
+                    )}
 
-                    <div
-                      onClick={() => setShape('Square')}
-                      className={`p-6 rounded-2xl border-2 cursor-pointer transition-all flex flex-col items-center text-center ${
-                        shape === 'Square'
-                          ? 'border-[#C86D51] bg-[#FAF7F2] shadow-md ring-2 ring-[#C86D51]/20'
-                          : 'border-[#EAE2D5] hover:border-[#C86D51]/50 bg-white'
-                      }`}
-                    >
-                      <div className="w-24 h-24 rounded-2xl bg-white border-4 border-[#EAE2D5] flex items-center justify-center shadow-inner mb-4">
-                        <span className="text-2xl font-bold text-[#362C2B]">50 mm</span>
-                      </div>
-                      <span className="font-bold text-[#362C2B] text-lg mb-1">Square Shape</span>
-                      <p className="text-xs text-[#5C4D4A]">Modern square format. Ideal for Instagram photo prints, artwork, and brand badges.</p>
-                    </div>
+                    {/* Render Shapes for Custom Magnets */}
+                    {product === 'magnet' && (
+                      <>
+                        <div
+                          onClick={() => setShape('65mm Round')}
+                          className={`p-5 rounded-2xl border-2 cursor-pointer transition-all flex flex-col items-center text-center ${
+                            shape === '65mm Round'
+                              ? 'border-[#C86D51] bg-[#FAF7F2] shadow-md ring-2 ring-[#C86D51]/20'
+                              : 'border-[#EAE2D5] hover:border-[#C86D51]/50 bg-white'
+                          }`}
+                        >
+                          <div className="w-20 h-20 rounded-full bg-white border-4 border-[#EAE2D5] flex items-center justify-center shadow-inner mb-3">
+                            <span className="text-base font-bold text-[#362C2B]">65 mm</span>
+                          </div>
+                          <span className="font-bold text-[#362C2B] text-base mb-1">65mm Round</span>
+                          <p className="text-xs text-[#5C4D4A]">Classic round magnetic souvenir badge.</p>
+                        </div>
+
+                        <div
+                          onClick={() => setShape('58mm Square (Rounded Corners)')}
+                          className={`p-5 rounded-2xl border-2 cursor-pointer transition-all flex flex-col items-center text-center ${
+                            shape === '58mm Square (Rounded Corners)'
+                              ? 'border-[#C86D51] bg-[#FAF7F2] shadow-md ring-2 ring-[#C86D51]/20'
+                              : 'border-[#EAE2D5] hover:border-[#C86D51]/50 bg-white'
+                          }`}
+                        >
+                          <div className="w-20 h-20 rounded-2xl bg-white border-4 border-[#EAE2D5] flex items-center justify-center shadow-inner mb-3">
+                            <span className="text-base font-bold text-[#362C2B]">58 mm</span>
+                          </div>
+                          <span className="font-bold text-[#362C2B] text-base mb-1">58mm Square (Rounded Corners)</span>
+                          <p className="text-xs text-[#5C4D4A]">Soft rounded-corner modern square format.</p>
+                        </div>
+
+                        <div
+                          onClick={() => setShape('50mm Square')}
+                          className={`p-5 rounded-2xl border-2 cursor-pointer transition-all flex flex-col items-center text-center ${
+                            shape === '50mm Square'
+                              ? 'border-[#C86D51] bg-[#FAF7F2] shadow-md ring-2 ring-[#C86D51]/20'
+                              : 'border-[#EAE2D5] hover:border-[#C86D51]/50 bg-white'
+                          }`}
+                        >
+                          <div className="w-20 h-20 rounded-md bg-white border-4 border-[#EAE2D5] flex items-center justify-center shadow-inner mb-3">
+                            <span className="text-base font-bold text-[#362C2B]">50 mm</span>
+                          </div>
+                          <span className="font-bold text-[#362C2B] text-base mb-1">50mm Square</span>
+                          <p className="text-xs text-[#5C4D4A]">Clean straight-edge square magnet.</p>
+                        </div>
+                      </>
+                    )}
+
+                    {/* Render Shapes for Collage / Puzzle Magnets */}
+                    {product === 'collage' && (
+                      <>
+                        <div
+                          onClick={() => setShape('2×3 Grid (6 Pcs)')}
+                          className={`p-5 rounded-2xl border-2 cursor-pointer transition-all flex flex-col items-center text-center ${
+                            shape.includes('2×3') || shape.includes('2x3')
+                              ? 'border-[#C86D51] bg-[#FAF7F2] shadow-md ring-2 ring-[#C86D51]/20'
+                              : 'border-[#EAE2D5] hover:border-[#C86D51]/50 bg-white'
+                          }`}
+                        >
+                          <div className="w-20 h-24 bg-white border-2 border-[#EAE2D5] rounded-lg grid grid-cols-2 gap-0.5 p-1 mb-3">
+                            {Array.from({ length: 6 }).map((_, i) => (
+                              <div key={i} className="bg-[#C86D51]/20 rounded-2xs" />
+                            ))}
+                          </div>
+                          <span className="font-bold text-[#362C2B] text-base mb-1">2×3 Grid (6 Magnets)</span>
+                          <p className="text-xs text-[#5C4D4A]">100mm × 150mm total area made of 6 pieces 50mm square magnets.</p>
+                        </div>
+
+                        <div
+                          onClick={() => setShape('3×3 Grid (9 Pcs)')}
+                          className={`p-5 rounded-2xl border-2 cursor-pointer transition-all flex flex-col items-center text-center ${
+                            shape.includes('3×3') || shape.includes('3x3')
+                              ? 'border-[#C86D51] bg-[#FAF7F2] shadow-md ring-2 ring-[#C86D51]/20'
+                              : 'border-[#EAE2D5] hover:border-[#C86D51]/50 bg-white'
+                          }`}
+                        >
+                          <div className="w-20 h-20 bg-white border-2 border-[#EAE2D5] rounded-lg grid grid-cols-3 gap-0.5 p-1 mb-3">
+                            {Array.from({ length: 9 }).map((_, i) => (
+                              <div key={i} className="bg-[#C86D51]/20 rounded-2xs" />
+                            ))}
+                          </div>
+                          <span className="font-bold text-[#362C2B] text-base mb-1">3×3 Grid (9 Magnets)</span>
+                          <p className="text-xs text-[#5C4D4A]">150mm × 150mm total area made of 9 pieces 50mm square magnets.</p>
+                        </div>
+
+                        <div
+                          onClick={() => setShape('3×4 Grid (12 Pcs)')}
+                          className={`p-5 rounded-2xl border-2 cursor-pointer transition-all flex flex-col items-center text-center ${
+                            shape.includes('3×4') || shape.includes('3x4')
+                              ? 'border-[#C86D51] bg-[#FAF7F2] shadow-md ring-2 ring-[#C86D51]/20'
+                              : 'border-[#EAE2D5] hover:border-[#C86D51]/50 bg-white'
+                          }`}
+                        >
+                          <div className="w-20 h-24 bg-white border-2 border-[#EAE2D5] rounded-lg grid grid-cols-3 gap-0.5 p-1 mb-3">
+                            {Array.from({ length: 12 }).map((_, i) => (
+                              <div key={i} className="bg-[#C86D51]/20 rounded-2xs" />
+                            ))}
+                          </div>
+                          <span className="font-bold text-[#362C2B] text-base mb-1">3×4 Grid (12 Magnets)</span>
+                          <p className="text-xs text-[#5C4D4A]">150mm × 200mm total area made of 12 pieces 50mm square magnets.</p>
+                        </div>
+
+                        <div
+                          onClick={() => setShape('4×4 Grid (16 Pcs)')}
+                          className={`p-5 rounded-2xl border-2 cursor-pointer transition-all flex flex-col items-center text-center ${
+                            shape.includes('4×4') || shape.includes('4x4')
+                              ? 'border-[#C86D51] bg-[#FAF7F2] shadow-md ring-2 ring-[#C86D51]/20'
+                              : 'border-[#EAE2D5] hover:border-[#C86D51]/50 bg-white'
+                          }`}
+                        >
+                          <div className="w-20 h-20 bg-white border-2 border-[#EAE2D5] rounded-lg grid grid-cols-4 gap-0.5 p-1 mb-3">
+                            {Array.from({ length: 16 }).map((_, i) => (
+                              <div key={i} className="bg-[#C86D51]/20 rounded-2xs" />
+                            ))}
+                          </div>
+                          <span className="font-bold text-[#362C2B] text-base mb-1">4×4 Grid (16 Magnets)</span>
+                          <p className="text-xs text-[#5C4D4A]">200mm × 200mm total area made of 16 pieces 50mm square magnets.</p>
+                        </div>
+                      </>
+                    )}
                   </div>
 
                   <div className="pt-6 flex justify-between">

@@ -8,12 +8,12 @@ import { formatAED, calculateUnitPrice, calculateTotalPrice } from '@/lib/utils'
 interface InteractiveStudioModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSendToQuote: (productType: 'pin' | 'magnet' | 'mirror', shape: 'Round' | 'Square', qty: number) => void;
+  onSendToQuote: (productType: 'pin' | 'magnet' | 'mirror' | 'collage', shape: string, qty: number) => void;
 }
 
 export function InteractiveStudioModal({ isOpen, onClose, onSendToQuote }: InteractiveStudioModalProps) {
-  const [product, setProduct] = useState<'pin' | 'magnet' | 'mirror'>('pin');
-  const [shape, setShape] = useState<'Round' | 'Square'>('Round');
+  const [product, setProduct] = useState<'pin' | 'magnet' | 'mirror' | 'collage'>('pin');
+  const [shape, setShape] = useState<string>('65mm Round');
   const [quantity, setQuantity] = useState<number>(25);
   const [glossEffect, setGlossEffect] = useState<boolean>(true);
   const [designUrl, setDesignUrl] = useState<string>(
@@ -26,8 +26,8 @@ export function InteractiveStudioModal({ isOpen, onClose, onSendToQuote }: Inter
 
   if (!isOpen) return null;
 
-  const unitPrice = calculateUnitPrice(product, quantity);
-  const totalPrice = calculateTotalPrice(product, quantity);
+  const unitPrice = calculateUnitPrice(product, quantity, shape);
+  const totalPrice = calculateTotalPrice(product, quantity, shape);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -164,51 +164,98 @@ export function InteractiveStudioModal({ isOpen, onClose, onSendToQuote }: Inter
             {/* Step 1: Product Selection */}
             <div>
               <label className="text-xs font-bold uppercase tracking-wider text-[#362C2B] block mb-1.5">
-                Product Type
+                Product Category
               </label>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
                 {PRODUCTS.map((p) => (
                   <button
                     key={p.id}
-                    onClick={() => setProduct(p.type)}
-                    className={`py-2 px-2 text-xs font-bold rounded-xl transition-all ${
+                    onClick={() => {
+                      setProduct(p.type);
+                      if (p.type === 'pin' || p.type === 'mirror') setShape('65mm Round');
+                      else if (p.type === 'magnet') setShape('65mm Round');
+                      else if (p.type === 'collage') setShape('2×3 Grid (6 Pcs)');
+                    }}
+                    className={`py-2 px-1.5 text-[11px] font-bold rounded-xl transition-all flex flex-col items-center text-center ${
                       product === p.type
                         ? 'bg-[#C86D51] text-white shadow-sm'
                         : 'bg-white text-[#362C2B] border border-[#EAE2D5]'
                     }`}
                   >
-                    {p.emoji} {p.type}
+                    <span className="text-base mb-0.5">{p.emoji}</span>
+                    <span className="truncate w-full">{p.name.replace('CUSTOM ', '')}</span>
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Step 2: Shape */}
+            {/* Step 2: Shape & Size Options */}
             <div>
               <label className="text-xs font-bold uppercase tracking-wider text-[#362C2B] block mb-1.5">
-                Keepsake Shape
+                Size & Specification
               </label>
-              <div className="grid grid-cols-2 gap-2">
-                <button
-                  onClick={() => setShape('Round')}
-                  className={`py-2 px-3 text-xs font-bold rounded-xl transition-all ${
-                    shape === 'Round'
-                      ? 'bg-[#C86D51] text-white shadow-sm'
-                      : 'bg-white text-[#362C2B] border border-[#EAE2D5]'
-                  }`}
-                >
-                  🟢 Round (58mm)
-                </button>
-                <button
-                  onClick={() => setShape('Square')}
-                  className={`py-2 px-3 text-xs font-bold rounded-xl transition-all ${
-                    shape === 'Square'
-                      ? 'bg-[#C86D51] text-white shadow-sm'
-                      : 'bg-white text-[#362C2B] border border-[#EAE2D5]'
-                  }`}
-                >
-                  ⬛ Square (50mm)
-                </button>
+              <div className="grid grid-cols-1 gap-1.5">
+                {(product === 'pin' || product === 'mirror') && (
+                  <button
+                    onClick={() => setShape('65mm Round')}
+                    className="py-2 px-3 text-xs font-bold rounded-xl bg-[#C86D51] text-white text-left"
+                  >
+                    🔴 65mm Round (Standard Badge / Pocket Mirror)
+                  </button>
+                )}
+
+                {product === 'magnet' && (
+                  <>
+                    <button
+                      onClick={() => setShape('65mm Round')}
+                      className={`py-2 px-3 text-xs font-bold rounded-xl text-left transition-all ${
+                        shape === '65mm Round'
+                          ? 'bg-[#C86D51] text-white'
+                          : 'bg-white text-[#362C2B] border border-[#EAE2D5]'
+                      }`}
+                    >
+                      🔴 65mm Round Magnet
+                    </button>
+                    <button
+                      onClick={() => setShape('58mm Square (Rounded Corners)')}
+                      className={`py-2 px-3 text-xs font-bold rounded-xl text-left transition-all ${
+                        shape === '58mm Square (Rounded Corners)'
+                          ? 'bg-[#C86D51] text-white'
+                          : 'bg-white text-[#362C2B] border border-[#EAE2D5]'
+                      }`}
+                    >
+                      🟧 58mm Square (Rounded Corners)
+                    </button>
+                    <button
+                      onClick={() => setShape('50mm Square')}
+                      className={`py-2 px-3 text-xs font-bold rounded-xl text-left transition-all ${
+                        shape === '50mm Square'
+                          ? 'bg-[#C86D51] text-white'
+                          : 'bg-white text-[#362C2B] border border-[#EAE2D5]'
+                      }`}
+                    >
+                      ⬛ 50mm Square Magnet
+                    </button>
+                  </>
+                )}
+
+                {product === 'collage' && (
+                  <div className="grid grid-cols-2 gap-1.5">
+                    {['2×3 Grid (6 Pcs)', '3×3 Grid (9 Pcs)', '3×4 Grid (12 Pcs)', '4×4 Grid (16 Pcs)'].map((gridOpt) => (
+                      <button
+                        key={gridOpt}
+                        onClick={() => setShape(gridOpt)}
+                        className={`py-2 px-2 text-[11px] font-bold rounded-xl transition-all ${
+                          shape === gridOpt
+                            ? 'bg-[#C86D51] text-white'
+                            : 'bg-white text-[#362C2B] border border-[#EAE2D5]'
+                        }`}
+                      >
+                        🧩 {gridOpt}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
 

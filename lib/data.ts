@@ -1,14 +1,14 @@
 export interface ProductItem {
   id: string;
   name: string;
-  type: 'pin' | 'magnet' | 'mirror';
+  type: 'pin' | 'magnet' | 'mirror' | 'collage';
   emoji: string;
   headline: string;
   tagline: string;
   description: string;
   perfectFor: string[];
-  shapes: ('Round' | 'Square')[];
-  basePriceAED: number; // For 1-9 pcs
+  shapes: string[];
+  basePriceAED: number; // For 1-9 pcs or base grid set
   badgeColor: string;
   bgGradient: string;
   image: string;
@@ -26,9 +26,9 @@ export interface PricingTier {
 export interface GalleryItem {
   id: string;
   title: string;
-  category: 'Pins' | 'Magnets' | 'Mirrors' | 'Events' | 'Corporate';
-  type: 'pin' | 'magnet' | 'mirror';
-  shape: 'Round' | 'Square';
+  category: 'Pins' | 'Magnets' | 'Mirrors' | 'Collages' | 'Events' | 'Corporate';
+  type: 'pin' | 'magnet' | 'mirror' | 'collage';
+  shape: string;
   image: string;
   story: string;
   client: string;
@@ -48,18 +48,17 @@ export const PRODUCTS: ProductItem[] = [
     type: 'pin',
     emoji: '📌',
     headline: 'Your Story, Worn Your Way.',
-    tagline: 'Personalized pins featuring your photos, artwork, logos, or designs.',
-    description: 'Make your favorite photo, illustration, logo, or message into a personalized pin that you can wear on your jacket, backpack, lanyard, or tote bag with pride.',
+    tagline: 'Personalized 65mm round pins featuring your photos, artwork, logos, or designs.',
+    description: 'Make your favorite photo, illustration, logo, or message into a personalized 65mm round pin that you can wear on your jacket, backpack, lanyard, or tote bag with pride.',
     perfectFor: [
       'Personal keepsakes',
       'Gifts',
-      'Events',
-      'Souvenirs',
-      'Sports events',
+      'Events & Souvenirs',
+      'Sports meets',
       'Corporate giveaways',
       'Clubs and organizations'
     ],
-    shapes: ['Round', 'Square'],
+    shapes: ['65mm Round'],
     basePriceAED: 15,
     badgeColor: 'bg-amber-100 text-amber-900 border-amber-300',
     bgGradient: 'from-amber-50 to-orange-50',
@@ -71,18 +70,17 @@ export const PRODUCTS: ProductItem[] = [
     type: 'magnet',
     emoji: '🧲',
     headline: 'Keep Your Favorite Memories Close.',
-    tagline: 'Turn your favorite memories into something you can display every day.',
-    description: 'Transform your favorite photographs, artwork, logos, or special designs into personalized magnets that brighten up your refrigerator, locker, or office whiteboard.',
+    tagline: 'Turn your favorite memories into round or square photo magnets.',
+    description: 'Transform photographs, artwork, or logos into personalized fridge magnets. Choose from 65mm Round, 58mm Square with soft rounded corners, or 50mm Square.',
     perfectFor: [
-      'Souvenirs',
+      'Travel souvenirs',
       'Wedding favors',
       'Birthday giveaways',
-      'Travel memories',
-      'Family photos',
+      'Family photo grids',
       'Business promotions',
-      'Event merchandise'
+      'Fridge & locker displays'
     ],
-    shapes: ['Round', 'Square'],
+    shapes: ['65mm Round', '58mm Square (Rounded Corners)', '50mm Square'],
     basePriceAED: 18,
     badgeColor: 'bg-emerald-100 text-emerald-900 border-emerald-300',
     bgGradient: 'from-emerald-50 to-teal-50',
@@ -94,21 +92,41 @@ export const PRODUCTS: ProductItem[] = [
     type: 'mirror',
     emoji: '🪞',
     headline: 'A Little Mirror With a Lot of Personality.',
-    tagline: 'A practical little keepsake with your own personalized design.',
-    description: 'Make your everyday mirror uniquely yours with a personalized photo, artwork, logo, or design on the back. Compact, durable, and stylish enough to carry everywhere.',
+    tagline: 'A practical 65mm round compact mirror with your custom design.',
+    description: 'Make your everyday pocket mirror uniquely yours with a custom photo, artwork, logo, or monogram printed on the back. Durable, stylish, and built to travel everywhere.',
     perfectFor: [
-      'Gifts',
-      'Souvenirs',
       'Bridesmaid gifts',
+      'Souvenirs',
       'Event giveaways',
       'Corporate merchandise',
       'Personalized keepsakes'
     ],
-    shapes: ['Round', 'Square'],
+    shapes: ['65mm Round'],
     basePriceAED: 22,
     badgeColor: 'bg-rose-100 text-rose-900 border-rose-300',
     bgGradient: 'from-rose-50 to-pink-50',
     image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800&auto=format&fit=crop'
+  },
+  {
+    id: 'collage',
+    name: 'COLLAGE / PUZZLE MAGNETS',
+    type: 'collage',
+    emoji: '🧩',
+    headline: 'Interactive Multi-Piece Photo Puzzle Grids.',
+    tagline: 'A statement magnetic collage assembled from 50mm square magnets.',
+    description: 'Transform a single high-resolution photograph or artwork into an interactive puzzle grid made of 50mm square magnets. Available in 2×3 (6 pcs), 3×3 (9 pcs), 3×4 (12 pcs), and 4×4 (16 pcs) grid configurations.',
+    perfectFor: [
+      'Statement fridge displays',
+      'Wedding memory mosaics',
+      'Anniversary gifts',
+      'Travel photo collections',
+      'Interactive brand artwork'
+    ],
+    shapes: ['2×3 Grid (6 Pcs)', '3×3 Grid (9 Pcs)', '3×4 Grid (12 Pcs)', '4×4 Grid (16 Pcs)'],
+    basePriceAED: 65,
+    badgeColor: 'bg-purple-100 text-purple-900 border-purple-300',
+    bgGradient: 'from-purple-50 to-indigo-50',
+    image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=800&auto=format&fit=crop'
   }
 ];
 
@@ -228,8 +246,8 @@ export const FAQS: FaqItem[] = [
   {
     id: 'f2',
     category: 'Customization',
-    question: 'What shapes are available?',
-    answer: 'Our pins, magnets, and mirrors are available in two classic shapes: Round (58mm diameter) and Square (50mm x 50mm).'
+    question: 'What sizes and shapes are available?',
+    answer: 'We offer exact specifications tailored to each product type:\n1. 65mm Round (available for Pins, Magnets, and Mirrors)\n2. 58mm Square with soft rounded corners (available for Magnets only)\n3. 50mm Square (available for Magnets only)\n4. Collage / Puzzle Magnets made of 50mm square magnets in 2×3 (6 pcs), 3×3 (9 pcs), 3×4 (12 pcs), or 4×4 (16 pcs) grids.'
   },
   {
     id: 'f3',

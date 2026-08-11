@@ -10,8 +10,8 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ onNavigate, onOpenStudio }: HeroSectionProps) {
-  const [selectedProduct, setSelectedProduct] = useState<'pin' | 'magnet' | 'mirror'>('pin');
-  const [selectedShape, setSelectedShape] = useState<'Round' | 'Square'>('Round');
+  const [selectedProduct, setSelectedProduct] = useState<'pin' | 'magnet' | 'mirror' | 'collage'>('pin');
+  const [selectedShape, setSelectedShape] = useState<string>('65mm Round');
 
   return (
     <section id="hero" className="relative bg-[#FAF7F2] pt-8 pb-16 lg:pt-12 lg:pb-24 overflow-hidden border-b border-[#EAE2D5]/60">

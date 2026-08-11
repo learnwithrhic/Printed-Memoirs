@@ -7,17 +7,17 @@ import { calculateUnitPrice, calculateTotalPrice, formatAED, getTierForQuantity 
 
 interface PricingSectionProps {
   onNavigate: (sectionId: string) => void;
-  onSelectProductForQuote: (productType: 'pin' | 'magnet' | 'mirror', shape?: 'Round' | 'Square', quantity?: number) => void;
+  onSelectProductForQuote: (productType: 'pin' | 'magnet' | 'mirror' | 'collage', shape?: string, quantity?: number) => void;
 }
 
 export function PricingSection({ onNavigate, onSelectProductForQuote }: PricingSectionProps) {
-  const [calcProduct, setCalcProduct] = useState<'pin' | 'magnet' | 'mirror'>('pin');
-  const [calcShape, setCalcShape] = useState<'Round' | 'Square'>('Round');
+  const [calcProduct, setCalcProduct] = useState<'pin' | 'magnet' | 'mirror' | 'collage'>('pin');
+  const [calcShape, setCalcShape] = useState<string>('65mm Round');
   const [calcQuantity, setCalcQuantity] = useState<number>(25);
 
   const currentProduct = PRODUCTS.find((p) => p.type === calcProduct) || PRODUCTS[0];
-  const unitPrice = calculateUnitPrice(calcProduct, calcQuantity);
-  const totalPrice = calculateTotalPrice(calcProduct, calcQuantity);
+  const unitPrice = calculateUnitPrice(calcProduct, calcQuantity, calcShape);
+  const totalPrice = calculateTotalPrice(calcProduct, calcQuantity, calcShape);
   const basePrice = currentProduct.basePriceAED;
   const standardTotal = basePrice * calcQuantity;
   const savings = Math.max(0, standardTotal - totalPrice);

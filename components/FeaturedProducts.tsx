@@ -6,7 +6,7 @@ import { formatAED } from '@/lib/utils';
 
 interface FeaturedProductsProps {
   onNavigate: (sectionId: string) => void;
-  onSelectProductForQuote: (productType: 'pin' | 'magnet' | 'mirror') => void;
+  onSelectProductForQuote: (productType: 'pin' | 'magnet' | 'mirror' | 'collage') => void;
 }
 
 export function FeaturedProducts({ onNavigate, onSelectProductForQuote }: FeaturedProductsProps) {
