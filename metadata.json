@@ -1,0 +1,6 @@
+{
+  "name": "Printed Memoirs",
+  "description": "Personalized pins, magnets, and mirrors made from your favorite photos, artwork, logos, and special moments in the UAE.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
