@@ -58,7 +58,7 @@ export function buildWhatsAppLink(details: {
   specialInstructions?: string
   message?: string
 }): string {
-  const phoneNumber = "971500000000" // UAE placeholder standard format
+  const phoneNumber = "971554682194" // UAE WhatsApp contact number
   
   let msg = `Hello Printed Memoirs! 👋\n\nI would like to inquire about a custom keepsake order:\n`
   if (details.name) msg += `👤 *Name:* ${details.name}\n`

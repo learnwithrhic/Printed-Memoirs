@@ -78,7 +78,7 @@ export function Footer({ onNavigate }: FooterProps) {
                 className="flex items-center space-x-2 hover:text-[#EFC257] transition-colors"
               >
                 <MessageSquare className="w-4 h-4 text-emerald-400" aria-hidden="true" />
-                <span>WhatsApp: +971 50 000 0000</span>
+                <span>WhatsApp: +971 55 468 2194</span>
               </a>
 
               <a

@@ -139,7 +139,7 @@ export function CorporateQuoteModal({ isOpen, onClose }: CorporateQuoteModalProp
                   <input
                     type="tel"
                     required
-                    placeholder="+971 50 123 4567"
+                    placeholder="+971 55 468 2194"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     className="w-full px-4 py-2.5 rounded-xl border border-[#EFE2C2] focus:outline-none focus:ring-2 focus:ring-[#777F56] text-sm text-[#2D321F]"

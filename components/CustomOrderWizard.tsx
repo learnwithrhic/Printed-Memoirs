@@ -775,7 +775,7 @@ export function CustomOrderWizard({
                       <input
                         type="tel"
                         required
-                        placeholder="+971 50 123 4567"
+                        placeholder="+971 55 468 2194"
                         value={whatsapp}
                         onChange={(e) => setWhatsapp(e.target.value)}
                         className="w-full px-4 py-3 rounded-xl border border-[#EFE2C2] focus:outline-none focus:ring-2 focus:ring-[#777F56] text-sm text-[#2D321F]"

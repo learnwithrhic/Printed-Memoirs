@@ -66,7 +66,7 @@ export function ContactSection() {
                 </div>
                 <div>
                   <span className="text-xs text-[#777F56] font-bold uppercase tracking-wider block">WhatsApp Direct</span>
-                  <span className="text-sm font-bold text-[#2D321F]">+971 50 000 0000</span>
+                  <span className="text-sm font-bold text-[#2D321F]">+971 55 468 2194</span>
                   <span className="text-[11px] text-emerald-700 font-semibold block">Click to Chat Instantly</span>
                 </div>
               </a>
@@ -161,7 +161,7 @@ export function ContactSection() {
                       <input
                         type="tel"
                         required
-                        placeholder="+971 50 123 4567"
+                        placeholder="+971 55 468 2194"
                         value={whatsapp}
                         onChange={(e) => setWhatsapp(e.target.value)}
                         className="w-full px-4 py-3 rounded-xl border border-[#EFE2C2] focus:outline-none focus:ring-2 focus:ring-[#777F56] text-sm text-[#2D321F]"
