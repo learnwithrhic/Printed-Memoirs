@@ -36,19 +36,19 @@ export function CorporateQuoteModal({ isOpen, onClose }: CorporateQuoteModalProp
       particleCount: 120,
       spread: 80,
       origin: { y: 0.6 },
-      colors: ['#C86D51', '#362C2B', '#EAE2D5'],
+      colors: ['#777F56', '#99A86F', '#EFC257'],
     });
   };
 
   return (
     <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
       <div
-        className="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-10 relative shadow-2xl my-8 border border-[#EAE2D5] animate-in zoom-in-95 duration-200"
+        className="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-10 relative shadow-2xl my-8 border border-[#EFE2C2] animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 text-[#4A3E3D] hover:bg-[#F3ECE2] rounded-full transition-colors"
+          className="absolute top-4 right-4 p-2 text-[#2D321F] hover:bg-[#EFE2C2]/40 rounded-full transition-colors"
           aria-label="Close modal"
         >
           <X className="w-6 h-6" aria-hidden="true" />
@@ -56,14 +56,14 @@ export function CorporateQuoteModal({ isOpen, onClose }: CorporateQuoteModalProp
 
         {submitted ? (
           <div className="text-center py-8 space-y-4">
-            <CheckCircle2 className="w-16 h-16 text-[#C86D51] mx-auto" aria-hidden="true" />
-            <h3 className="font-serif text-3xl font-bold text-[#362C2B]">Corporate Quote Requested!</h3>
-            <p className="text-sm text-[#5C4D4A] max-w-md mx-auto">
+            <CheckCircle2 className="w-16 h-16 text-[#777F56] mx-auto" aria-hidden="true" />
+            <h3 className="font-serif text-3xl font-bold text-[#2D321F]">Corporate Quote Requested!</h3>
+            <p className="text-sm text-[#4E553D] max-w-md mx-auto">
               Thank you, {contactName} from {companyName || 'your organization'}! Our B2B account manager will review your event specifications and issue an official quotation with volume pricing within 4 business hours.
             </p>
             <button
               onClick={onClose}
-              className="px-8 py-3 bg-[#C86D51] text-white font-bold text-sm rounded-full shadow-md"
+              className="px-8 py-3 bg-[#777F56] hover:bg-[#636B45] text-white font-bold text-sm rounded-full shadow-md"
             >
               Done
             </button>
@@ -71,27 +71,27 @@ export function CorporateQuoteModal({ isOpen, onClose }: CorporateQuoteModalProp
         ) : (
           <div>
             <div className="flex items-center space-x-3 mb-4">
-              <div className="p-3 bg-[#F3ECE2] text-[#C86D51] rounded-2xl">
+              <div className="p-3 bg-[#EFE2C2]/50 text-[#777F56] rounded-2xl">
                 <Building2 className="w-6 h-6" aria-hidden="true" />
               </div>
               <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-[#C86D51]">
+                <span className="text-xs font-bold uppercase tracking-widest text-[#777F56]">
                   Corporate & Large Event Quotation
                 </span>
-                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#362C2B]">
+                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#2D321F]">
                   REQUEST A CORPORATE QUOTE
                 </h3>
               </div>
             </div>
 
-            <p className="text-xs text-[#5C4D4A] mb-6">
+            <p className="text-xs text-[#4E553D] mb-6">
               Custom pins, magnets, and mirrors branded with your logo, event artwork, or sponsor graphics.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-bold uppercase tracking-wider text-[#362C2B] block mb-1">
+                  <label className="text-xs font-bold uppercase tracking-wider text-[#2D321F] block mb-1">
                     Company / Organization Name
                   </label>
                   <input
@@ -100,12 +100,12 @@ export function CorporateQuoteModal({ isOpen, onClose }: CorporateQuoteModalProp
                     placeholder="e.g. Dubai Tech Summit"
                     value={companyName}
                     onChange={(e) => setCompanyName(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-[#EAE2D5] focus:outline-none focus:ring-2 focus:ring-[#C86D51] text-sm text-[#362C2B]"
+                    className="w-full px-4 py-2.5 rounded-xl border border-[#EFE2C2] focus:outline-none focus:ring-2 focus:ring-[#777F56] text-sm text-[#2D321F]"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold uppercase tracking-wider text-[#362C2B] block mb-1">
+                  <label className="text-xs font-bold uppercase tracking-wider text-[#2D321F] block mb-1">
                     Contact Person Name *
                   </label>
                   <input
@@ -114,12 +114,12 @@ export function CorporateQuoteModal({ isOpen, onClose }: CorporateQuoteModalProp
                     placeholder="Your Full Name"
                     value={contactName}
                     onChange={(e) => setContactName(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-[#EAE2D5] focus:outline-none focus:ring-2 focus:ring-[#C86D51] text-sm text-[#362C2B]"
+                    className="w-full px-4 py-2.5 rounded-xl border border-[#EFE2C2] focus:outline-none focus:ring-2 focus:ring-[#777F56] text-sm text-[#2D321F]"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold uppercase tracking-wider text-[#362C2B] block mb-1">
+                  <label className="text-xs font-bold uppercase tracking-wider text-[#2D321F] block mb-1">
                     Corporate Email *
                   </label>
                   <input
@@ -128,12 +128,12 @@ export function CorporateQuoteModal({ isOpen, onClose }: CorporateQuoteModalProp
                     placeholder="name@company.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-[#EAE2D5] focus:outline-none focus:ring-2 focus:ring-[#C86D51] text-sm text-[#362C2B]"
+                    className="w-full px-4 py-2.5 rounded-xl border border-[#EFE2C2] focus:outline-none focus:ring-2 focus:ring-[#777F56] text-sm text-[#2D321F]"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold uppercase tracking-wider text-[#362C2B] block mb-1">
+                  <label className="text-xs font-bold uppercase tracking-wider text-[#2D321F] block mb-1">
                     Phone / WhatsApp Number *
                   </label>
                   <input
@@ -142,13 +142,13 @@ export function CorporateQuoteModal({ isOpen, onClose }: CorporateQuoteModalProp
                     placeholder="+971 50 123 4567"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-[#EAE2D5] focus:outline-none focus:ring-2 focus:ring-[#C86D51] text-sm text-[#362C2B]"
+                    className="w-full px-4 py-2.5 rounded-xl border border-[#EFE2C2] focus:outline-none focus:ring-2 focus:ring-[#777F56] text-sm text-[#2D321F]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-bold uppercase tracking-wider text-[#362C2B] block mb-1.5">
+                <label className="text-xs font-bold uppercase tracking-wider text-[#2D321F] block mb-1.5">
                   Products Needed (Select all that apply)
                 </label>
                 <div className="flex flex-wrap gap-2">
@@ -161,8 +161,8 @@ export function CorporateQuoteModal({ isOpen, onClose }: CorporateQuoteModalProp
                         onClick={() => toggleProduct(item)}
                         className={`px-4 py-2 rounded-xl text-xs font-bold border transition-colors ${
                           isChecked
-                            ? 'bg-[#C86D51] text-white border-[#C86D51]'
-                            : 'bg-[#FAF7F2] text-[#5C4D4A] border-[#EAE2D5]'
+                            ? 'bg-[#777F56] text-white border-[#777F56]'
+                            : 'bg-[#FDFBF6] text-[#4E553D] border-[#EFE2C2]'
                         }`}
                       >
                         {item === 'Pins' && '📌 Custom Pins'}
@@ -176,13 +176,13 @@ export function CorporateQuoteModal({ isOpen, onClose }: CorporateQuoteModalProp
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-bold uppercase tracking-wider text-[#362C2B] block mb-1">
+                  <label className="text-xs font-bold uppercase tracking-wider text-[#2D321F] block mb-1">
                     Event Type
                   </label>
                   <select
                     value={eventType}
                     onChange={(e) => setEventType(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-[#EAE2D5] focus:outline-none focus:ring-2 focus:ring-[#C86D51] text-sm text-[#362C2B] bg-white"
+                    className="w-full px-4 py-2.5 rounded-xl border border-[#EFE2C2] focus:outline-none focus:ring-2 focus:ring-[#777F56] text-sm text-[#2D321F] bg-white"
                   >
                     <option value="Corporate Event">Corporate Event / Conference</option>
                     <option value="Sports Event">Sports Meet / Race</option>
@@ -194,13 +194,13 @@ export function CorporateQuoteModal({ isOpen, onClose }: CorporateQuoteModalProp
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold uppercase tracking-wider text-[#362C2B] block mb-1">
+                  <label className="text-xs font-bold uppercase tracking-wider text-[#2D321F] block mb-1">
                     Estimated Quantity
                   </label>
                   <select
                     value={quantity}
                     onChange={(e) => setQuantity(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-[#EAE2D5] focus:outline-none focus:ring-2 focus:ring-[#C86D51] text-sm text-[#362C2B] bg-white"
+                    className="w-full px-4 py-2.5 rounded-xl border border-[#EFE2C2] focus:outline-none focus:ring-2 focus:ring-[#777F56] text-sm text-[#2D321F] bg-white"
                   >
                     <option value="25–49 pieces">25–49 pieces</option>
                     <option value="50–99 pieces">50–99 pieces</option>
@@ -212,7 +212,7 @@ export function CorporateQuoteModal({ isOpen, onClose }: CorporateQuoteModalProp
               </div>
 
               <div>
-                <label className="text-xs font-bold uppercase tracking-wider text-[#362C2B] block mb-1">
+                <label className="text-xs font-bold uppercase tracking-wider text-[#2D321F] block mb-1">
                   Event / Branding Details & Special Requests
                 </label>
                 <textarea
@@ -220,15 +220,15 @@ export function CorporateQuoteModal({ isOpen, onClose }: CorporateQuoteModalProp
                   placeholder="Include dates, delivery city in UAE, artwork requirements, or budget constraints..."
                   value={details}
                   onChange={(e) => setDetails(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl border border-[#EAE2D5] focus:outline-none focus:ring-2 focus:ring-[#C86D51] text-sm text-[#362C2B]"
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#EFE2C2] focus:outline-none focus:ring-2 focus:ring-[#777F56] text-sm text-[#2D321F]"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-4 bg-[#C86D51] hover:bg-[#B25C42] text-white font-bold text-base rounded-full shadow-md transition-all flex items-center justify-center min-h-[48px]"
+                className="w-full py-4 bg-[#777F56] hover:bg-[#636B45] text-white font-bold text-base rounded-full shadow-md transition-all flex items-center justify-center min-h-[48px]"
               >
-                <Sparkles className="w-5 h-5 mr-2" aria-hidden="true" />
+                <Sparkles className="w-5 h-5 mr-2 text-[#EFC257]" aria-hidden="true" />
                 SUBMIT CORPORATE REQUEST
               </button>
             </form>

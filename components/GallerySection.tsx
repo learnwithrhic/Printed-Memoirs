@@ -15,18 +15,18 @@ export function GallerySection() {
     : GALLERY_ITEMS.filter((item) => item.category === selectedCategory);
 
   return (
-    <section id="gallery" className="py-16 lg:py-24 bg-[#FAF7F2] border-b border-[#EAE2D5]/60">
+    <section id="gallery" className="py-16 lg:py-24 bg-[#FDFBF6] border-b border-[#EFE2C2]/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#C86D51] mb-2 block">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#777F56] mb-2 block">
             Client Showcase
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#362C2B] tracking-tight mb-4">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#2D321F] tracking-tight mb-4">
             MEMORIES WE&apos;VE MADE
           </h2>
-          <p className="text-base sm:text-lg text-[#5C4D4A] leading-relaxed">
+          <p className="text-base sm:text-lg text-[#4E553D] leading-relaxed">
             Every design has a story. Take a look at some of the personalized pieces we&apos;ve created for weddings, brand events, family celebrations, and everyday moments.
           </p>
         </div>
@@ -37,10 +37,10 @@ export function GallerySection() {
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all min-h-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C86D51] ${
+              className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all min-h-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#777F56] ${
                 selectedCategory === cat
-                  ? 'bg-[#C86D51] text-white shadow-sm'
-                  : 'bg-white text-[#5C4D4A] hover:bg-[#F3ECE2] border border-[#EAE2D5]'
+                  ? 'bg-[#777F56] text-white shadow-sm'
+                  : 'bg-white text-[#4E553D] hover:bg-[#EFE2C2]/40 border border-[#EFE2C2]'
               }`}
             >
               {cat}
@@ -54,9 +54,9 @@ export function GallerySection() {
             <div
               key={item.id}
               onClick={() => setActiveItem(item)}
-              className="bg-white rounded-3xl border border-[#EAE2D5] overflow-hidden shadow-2xs hover:shadow-lg transition-all duration-300 cursor-pointer group"
+              className="bg-white rounded-3xl border border-[#EFE2C2] overflow-hidden shadow-2xs hover:shadow-lg transition-all duration-300 cursor-pointer group"
             >
-              <div className="relative aspect-4/3 w-full bg-[#FAF7F2] overflow-hidden">
+              <div className="relative aspect-4/3 w-full bg-[#FDFBF6] overflow-hidden">
                 <img
                   src={item.image}
                   alt={item.title}
@@ -69,20 +69,20 @@ export function GallerySection() {
                 </div>
 
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-                  <div className="p-3 bg-[#C86D51] rounded-full shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform">
-                    <Eye className="w-5 h-5" aria-hidden="true" />
+                  <div className="p-3 bg-[#777F56] rounded-full shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                    <Eye className="w-5 h-5 text-white" aria-hidden="true" />
                   </div>
                 </div>
               </div>
 
               <div className="p-6">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#C86D51] block mb-1">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#777F56] block mb-1">
                   {item.category} • {item.client}
                 </span>
-                <h3 className="font-serif text-xl font-bold text-[#362C2B] mb-2">
+                <h3 className="font-serif text-xl font-bold text-[#2D321F] mb-2">
                   {item.title}
                 </h3>
-                <p className="text-xs text-[#5C4D4A] line-clamp-2">
+                <p className="text-xs text-[#4E553D] line-clamp-2">
                   {item.story}
                 </p>
               </div>
@@ -102,13 +102,13 @@ export function GallerySection() {
             >
               <button
                 onClick={() => setActiveItem(null)}
-                className="absolute top-4 right-4 p-2 text-[#4A3E3D] hover:bg-[#F3ECE2] rounded-full transition-colors"
+                className="absolute top-4 right-4 p-2 text-[#2D321F] hover:bg-[#EFE2C2]/40 rounded-full transition-colors"
                 aria-label="Close modal"
               >
                 <X className="w-6 h-6" aria-hidden="true" />
               </button>
 
-              <div className="aspect-16/9 w-full rounded-2xl overflow-hidden mb-6 bg-[#FAF7F2]">
+              <div className="aspect-16/9 w-full rounded-2xl overflow-hidden mb-6 bg-[#FDFBF6]">
                 <img
                   src={activeItem.image}
                   alt={activeItem.title}
@@ -117,17 +117,17 @@ export function GallerySection() {
                 />
               </div>
 
-              <span className="text-xs font-bold uppercase tracking-widest text-[#C86D51] block mb-1">
+              <span className="text-xs font-bold uppercase tracking-widest text-[#777F56] block mb-1">
                 {activeItem.category} • {activeItem.client}
               </span>
-              <h3 className="font-serif text-2xl font-bold text-[#362C2B] mb-3">
+              <h3 className="font-serif text-2xl font-bold text-[#2D321F] mb-3">
                 {activeItem.title}
               </h3>
-              <p className="text-sm text-[#5C4D4A] leading-relaxed mb-4">
+              <p className="text-sm text-[#4E553D] leading-relaxed mb-4">
                 {activeItem.story}
               </p>
 
-              <div className="inline-block bg-[#FAF7F2] px-4 py-2 rounded-xl border border-[#EAE2D5] text-xs font-semibold text-[#362C2B]">
+              <div className="inline-block bg-[#FDFBF6] px-4 py-2 rounded-xl border border-[#EFE2C2] text-xs font-semibold text-[#2D321F]">
                 Format: {activeItem.shape} {activeItem.type.toUpperCase()}
               </div>
             </div>

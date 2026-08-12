@@ -48,20 +48,20 @@ export function InteractiveStudioModal({ isOpen, onClose, onSendToQuote }: Inter
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 text-[#4A3E3D] hover:bg-[#EAE2D5] rounded-full transition-colors"
+          className="absolute top-4 right-4 p-2 text-[#2D321F] hover:bg-[#EFE2C2] rounded-full transition-colors"
           aria-label="Close studio simulator"
         >
           <X className="w-6 h-6" aria-hidden="true" />
         </button>
 
         <div className="text-center mb-6">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#C86D51] mb-1 block">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#777F56] mb-1 block">
             3D Keepsake Simulator
           </span>
-          <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#362C2B]">
+          <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#2D321F]">
             Interactive Design Studio
           </h3>
-          <p className="text-xs text-[#5C4D4A]">
+          <p className="text-xs text-[#4E553D]">
             Test your photo or artwork live on custom pins, magnets, and mirrors.
           </p>
         </div>
@@ -69,14 +69,14 @@ export function InteractiveStudioModal({ isOpen, onClose, onSendToQuote }: Inter
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           {/* Left Column: Visual Replica Stage */}
-          <div className="lg:col-span-6 bg-white p-6 rounded-2xl border border-[#EAE2D5] shadow-inner text-center flex flex-col items-center">
+          <div className="lg:col-span-6 bg-white p-6 rounded-2xl border border-[#EFE2C2] shadow-inner text-center flex flex-col items-center">
             
             {/* Shape Stage */}
             <div className="relative w-64 h-64 my-4 flex items-center justify-center">
               
               {/* Product Badge Replica */}
               <div
-                className={`relative transition-all duration-300 w-56 h-56 shadow-2xl border-4 border-[#EAE2D5] overflow-hidden flex items-center justify-center ${
+                className={`relative transition-all duration-300 w-56 h-56 shadow-2xl border-4 border-[#EFE2C2] overflow-hidden flex items-center justify-center ${
                   shape === 'Round' ? 'rounded-full' : 'rounded-3xl'
                 }`}
                 style={{ backgroundColor: '#ffffff' }}
@@ -103,22 +103,22 @@ export function InteractiveStudioModal({ isOpen, onClose, onSendToQuote }: Inter
               </div>
 
               {/* Product Badge Overlay Tag */}
-              <div className="absolute bottom-1 bg-black/80 backdrop-blur-xs text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+              <div className="absolute bottom-1 bg-[#2D321F]/90 backdrop-blur-xs text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
                 {shape} {product.toUpperCase()}
               </div>
             </div>
 
             {/* Fine-Tuning Controls */}
-            <div className="w-full space-y-3 pt-2 border-t border-[#EAE2D5] text-xs">
+            <div className="w-full space-y-3 pt-2 border-t border-[#EFE2C2] text-xs">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-[#362C2B] flex items-center">
-                  <Sun className="w-3.5 h-3.5 mr-1 text-[#C86D51]" />
+                <span className="font-bold text-[#2D321F] flex items-center">
+                  <Sun className="w-3.5 h-3.5 mr-1 text-[#777F56]" />
                   Gloss Finish Sheen:
                 </span>
                 <button
                   onClick={() => setGlossEffect(!glossEffect)}
                   className={`px-3 py-1 rounded-full font-bold ${
-                    glossEffect ? 'bg-[#C86D51] text-white' : 'bg-[#EAE2D5] text-[#362C2B]'
+                    glossEffect ? 'bg-[#777F56] text-white' : 'bg-[#EFE2C2] text-[#2D321F]'
                   }`}
                 >
                   {glossEffect ? 'Gloss On' : 'Matte'}
@@ -126,8 +126,8 @@ export function InteractiveStudioModal({ isOpen, onClose, onSendToQuote }: Inter
               </div>
 
               <div className="flex items-center justify-between space-x-2">
-                <span className="font-bold text-[#362C2B] flex items-center">
-                  <ZoomIn className="w-3.5 h-3.5 mr-1 text-[#C86D51]" />
+                <span className="font-bold text-[#2D321F] flex items-center">
+                  <ZoomIn className="w-3.5 h-3.5 mr-1 text-[#777F56]" />
                   Zoom:
                 </span>
                 <input
@@ -136,13 +136,13 @@ export function InteractiveStudioModal({ isOpen, onClose, onSendToQuote }: Inter
                   max="160"
                   value={zoom}
                   onChange={(e) => setZoom(parseInt(e.target.value))}
-                  className="w-32 accent-[#C86D51]"
+                  className="w-32 accent-[#777F56]"
                 />
               </div>
 
               <div className="flex items-center justify-between space-x-2">
-                <span className="font-bold text-[#362C2B] flex items-center">
-                  <RotateCw className="w-3.5 h-3.5 mr-1 text-[#C86D51]" />
+                <span className="font-bold text-[#2D321F] flex items-center">
+                  <RotateCw className="w-3.5 h-3.5 mr-1 text-[#777F56]" />
                   Rotate:
                 </span>
                 <input
@@ -151,7 +151,7 @@ export function InteractiveStudioModal({ isOpen, onClose, onSendToQuote }: Inter
                   max="180"
                   value={rotation}
                   onChange={(e) => setRotation(parseInt(e.target.value))}
-                  className="w-32 accent-[#C86D51]"
+                  className="w-32 accent-[#777F56]"
                 />
               </div>
             </div>
@@ -163,7 +163,7 @@ export function InteractiveStudioModal({ isOpen, onClose, onSendToQuote }: Inter
             
             {/* Step 1: Product Selection */}
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-[#362C2B] block mb-1.5">
+              <label className="text-xs font-bold uppercase tracking-wider text-[#2D321F] block mb-1.5">
                 Product Category
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
@@ -178,8 +178,8 @@ export function InteractiveStudioModal({ isOpen, onClose, onSendToQuote }: Inter
                     }}
                     className={`py-2 px-1.5 text-[11px] font-bold rounded-xl transition-all flex flex-col items-center text-center ${
                       product === p.type
-                        ? 'bg-[#C86D51] text-white shadow-sm'
-                        : 'bg-white text-[#362C2B] border border-[#EAE2D5]'
+                        ? 'bg-[#777F56] text-white shadow-sm'
+                        : 'bg-white text-[#2D321F] border border-[#EFE2C2]'
                     }`}
                   >
                     <span className="text-base mb-0.5">{p.emoji}</span>
@@ -191,14 +191,14 @@ export function InteractiveStudioModal({ isOpen, onClose, onSendToQuote }: Inter
 
             {/* Step 2: Shape & Size Options */}
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-[#362C2B] block mb-1.5">
+              <label className="text-xs font-bold uppercase tracking-wider text-[#2D321F] block mb-1.5">
                 Size & Specification
               </label>
               <div className="grid grid-cols-1 gap-1.5">
                 {(product === 'pin' || product === 'mirror') && (
                   <button
                     onClick={() => setShape('65mm Round')}
-                    className="py-2 px-3 text-xs font-bold rounded-xl bg-[#C86D51] text-white text-left"
+                    className="py-2 px-3 text-xs font-bold rounded-xl bg-[#777F56] text-white text-left"
                   >
                     🔴 65mm Round (Standard Badge / Pocket Mirror)
                   </button>
@@ -210,8 +210,8 @@ export function InteractiveStudioModal({ isOpen, onClose, onSendToQuote }: Inter
                       onClick={() => setShape('65mm Round')}
                       className={`py-2 px-3 text-xs font-bold rounded-xl text-left transition-all ${
                         shape === '65mm Round'
-                          ? 'bg-[#C86D51] text-white'
-                          : 'bg-white text-[#362C2B] border border-[#EAE2D5]'
+                          ? 'bg-[#777F56] text-white'
+                          : 'bg-white text-[#2D321F] border border-[#EFE2C2]'
                       }`}
                     >
                       🔴 65mm Round Magnet
@@ -220,8 +220,8 @@ export function InteractiveStudioModal({ isOpen, onClose, onSendToQuote }: Inter
                       onClick={() => setShape('58mm Square (Rounded Corners)')}
                       className={`py-2 px-3 text-xs font-bold rounded-xl text-left transition-all ${
                         shape === '58mm Square (Rounded Corners)'
-                          ? 'bg-[#C86D51] text-white'
-                          : 'bg-white text-[#362C2B] border border-[#EAE2D5]'
+                          ? 'bg-[#777F56] text-white'
+                          : 'bg-white text-[#2D321F] border border-[#EFE2C2]'
                       }`}
                     >
                       🟧 58mm Square (Rounded Corners)
@@ -230,8 +230,8 @@ export function InteractiveStudioModal({ isOpen, onClose, onSendToQuote }: Inter
                       onClick={() => setShape('50mm Square')}
                       className={`py-2 px-3 text-xs font-bold rounded-xl text-left transition-all ${
                         shape === '50mm Square'
-                          ? 'bg-[#C86D51] text-white'
-                          : 'bg-white text-[#362C2B] border border-[#EAE2D5]'
+                          ? 'bg-[#777F56] text-white'
+                          : 'bg-white text-[#2D321F] border border-[#EFE2C2]'
                       }`}
                     >
                       ⬛ 50mm Square Magnet
@@ -247,8 +247,8 @@ export function InteractiveStudioModal({ isOpen, onClose, onSendToQuote }: Inter
                         onClick={() => setShape(gridOpt)}
                         className={`py-2 px-2 text-[11px] font-bold rounded-xl transition-all ${
                           shape === gridOpt
-                            ? 'bg-[#C86D51] text-white'
-                            : 'bg-white text-[#362C2B] border border-[#EAE2D5]'
+                            ? 'bg-[#777F56] text-white'
+                            : 'bg-white text-[#2D321F] border border-[#EFE2C2]'
                         }`}
                       >
                         🧩 {gridOpt}
@@ -262,12 +262,12 @@ export function InteractiveStudioModal({ isOpen, onClose, onSendToQuote }: Inter
             {/* Step 3: Change Image */}
             <div>
               <div className="flex justify-between items-center mb-1.5">
-                <label className="text-xs font-bold uppercase tracking-wider text-[#362C2B]">
+                <label className="text-xs font-bold uppercase tracking-wider text-[#2D321F]">
                   Upload Artwork / Photo
                 </label>
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="text-xs font-bold text-[#C86D51] underline"
+                  className="text-xs font-bold text-[#777F56] underline"
                 >
                   Browse File
                 </button>
@@ -286,7 +286,7 @@ export function InteractiveStudioModal({ isOpen, onClose, onSendToQuote }: Inter
                   <div
                     key={preset.id}
                     onClick={() => setDesignUrl(preset.url)}
-                    className="aspect-square rounded-lg overflow-hidden border border-[#EAE2D5] cursor-pointer hover:border-[#C86D51]"
+                    className="aspect-square rounded-lg overflow-hidden border border-[#EFE2C2] cursor-pointer hover:border-[#777F56]"
                   >
                     <img src={preset.url} alt={preset.name} className="w-full h-full object-cover" />
                   </div>
@@ -295,29 +295,29 @@ export function InteractiveStudioModal({ isOpen, onClose, onSendToQuote }: Inter
             </div>
 
             {/* Step 4: Quantity & Pricing */}
-            <div className="bg-white p-4 rounded-xl border border-[#EAE2D5] space-y-2 text-xs">
+            <div className="bg-white p-4 rounded-xl border border-[#EFE2C2] space-y-2 text-xs">
               <div className="flex justify-between items-center">
-                <span className="font-bold text-[#362C2B]">Quantity Needed:</span>
+                <span className="font-bold text-[#2D321F]">Quantity Needed:</span>
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 5))}
-                    className="w-6 h-6 bg-[#FAF7F2] border rounded font-bold"
+                    className="w-6 h-6 bg-[#FDFBF6] border border-[#EFE2C2] rounded font-bold text-[#2D321F]"
                   >
                     -
                   </button>
-                  <span className="font-bold">{quantity} pcs</span>
+                  <span className="font-bold text-[#2D321F]">{quantity} pcs</span>
                   <button
                     onClick={() => setQuantity(quantity + 5)}
-                    className="w-6 h-6 bg-[#FAF7F2] border rounded font-bold"
+                    className="w-6 h-6 bg-[#FDFBF6] border border-[#EFE2C2] rounded font-bold text-[#2D321F]"
                   >
                     +
                   </button>
                 </div>
               </div>
 
-              <div className="flex justify-between items-baseline pt-2 border-t border-[#EAE2D5]">
-                <span className="font-bold text-[#362C2B]">Est. Total ({formatAED(unitPrice)}/pc):</span>
-                <span className="font-serif text-2xl font-bold text-[#C86D51]">{formatAED(totalPrice)}</span>
+              <div className="flex justify-between items-baseline pt-2 border-t border-[#EFE2C2]">
+                <span className="font-bold text-[#2D321F]">Est. Total ({formatAED(unitPrice)}/pc):</span>
+                <span className="font-serif text-2xl font-bold text-[#777F56]">{formatAED(totalPrice)}</span>
               </div>
             </div>
 
@@ -327,9 +327,9 @@ export function InteractiveStudioModal({ isOpen, onClose, onSendToQuote }: Inter
                 onSendToQuote(product, shape, quantity);
                 onClose();
               }}
-              className="w-full py-3.5 bg-[#C86D51] hover:bg-[#B25C42] text-white font-bold rounded-2xl shadow-md transition-colors flex items-center justify-center space-x-2"
+              className="w-full py-3.5 bg-[#777F56] hover:bg-[#636B45] text-white font-bold rounded-2xl shadow-md transition-colors flex items-center justify-center space-x-2"
             >
-              <Sparkles className="w-4 h-4" aria-hidden="true" />
+              <Sparkles className="w-4 h-4 text-[#EFC257]" aria-hidden="true" />
               <span>Use This Design in Custom Order Form</span>
             </button>
 

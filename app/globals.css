@@ -4,12 +4,19 @@
   :root {
     --font-serif: 'Playfair Display', Georgia, serif;
     --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+    
+    /* Printed Memoirs Brand Palette */
+    --color-moss: #777F56;
+    --color-sage: #99A86F;
+    --color-cream: #EFE2C2;
+    --color-gold: #EFC257;
+    --color-terracotta: #E1A77A;
   }
 
   body {
     font-family: var(--font-sans);
-    background-color: #FAF7F2;
-    color: #1C1917;
+    background-color: #FDFBF6;
+    color: #2D321F;
   }
 
   h1, h2, h3, h4, .font-serif {
@@ -22,12 +29,12 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #FAF7F2;
+  background: #FDFBF6;
 }
 ::-webkit-scrollbar-thumb {
-  background: #EAE2D5;
+  background: #EFE2C2;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #C86D51;
+  background: #777F56;
 }

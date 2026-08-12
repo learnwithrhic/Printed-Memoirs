@@ -44,17 +44,17 @@ export function QuickQuoteDrawer({ isOpen, onClose, onNavigateToOrderForm }: Qui
 
   return (
     <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex justify-end">
-      <div className="bg-[#FAF7F2] w-full max-w-md h-full shadow-2xl p-6 overflow-y-auto flex flex-col border-l border-[#EAE2D5] animate-in slide-in-from-right duration-200">
+      <div className="bg-[#FDFBF6] w-full max-w-md h-full shadow-2xl p-6 overflow-y-auto flex flex-col border-l border-[#EFE2C2] animate-in slide-in-from-right duration-200">
         
         {/* Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-[#EAE2D5]">
+        <div className="flex items-center justify-between pb-4 border-b border-[#EFE2C2]">
           <div className="flex items-center space-x-2">
-            <ShoppingBag className="w-5 h-5 text-[#C86D51]" aria-hidden="true" />
-            <h3 className="font-serif text-xl font-bold text-[#362C2B]">Quote Drafts</h3>
+            <ShoppingBag className="w-5 h-5 text-[#777F56]" aria-hidden="true" />
+            <h3 className="font-serif text-xl font-bold text-[#2D321F]">Quote Drafts</h3>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-[#4A3E3D] hover:bg-[#EAE2D5] rounded-full transition-colors"
+            className="p-2 text-[#2D321F] hover:bg-[#EFE2C2] rounded-full transition-colors"
             aria-label="Close drawer"
           >
             <X className="w-5 h-5" aria-hidden="true" />
@@ -67,27 +67,27 @@ export function QuickQuoteDrawer({ isOpen, onClose, onNavigateToOrderForm }: Qui
             savedQuotes.map((q, idx) => (
               <div
                 key={idx}
-                className="bg-white p-4 rounded-2xl border border-[#EAE2D5] shadow-2xs relative space-y-2"
+                className="bg-white p-4 rounded-2xl border border-[#EFE2C2] shadow-2xs relative space-y-2"
               >
                 <button
                   onClick={() => handleClearQuote(idx)}
-                  className="absolute top-3 right-3 text-[#8C7A78] hover:text-rose-600 p-1"
+                  className="absolute top-3 right-3 text-[#777F56] hover:text-rose-600 p-1"
                   title="Remove quote"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
 
                 <div className="pr-6">
-                  <span className="text-[10px] font-bold text-[#C86D51] uppercase tracking-wider block">
+                  <span className="text-[10px] font-bold text-[#777F56] uppercase tracking-wider block">
                     Ref: {q.orderId || 'Draft'}
                   </span>
-                  <h4 className="font-bold text-[#362C2B] text-base capitalize">
+                  <h4 className="font-bold text-[#2D321F] text-base capitalize">
                     {q.shape} Custom {q.product}
                   </h4>
-                  <p className="text-xs text-[#5C4D4A]">
+                  <p className="text-xs text-[#4E553D]">
                     Quantity: <span className="font-bold">{q.quantity} pcs</span>
                   </p>
-                  <p className="text-xs font-serif font-bold text-[#362C2B] mt-1">
+                  <p className="text-xs font-serif font-bold text-[#2D321F] mt-1">
                     Est. Total: {formatAED(q.totalPrice || 0)}
                   </p>
                 </div>
@@ -110,8 +110,8 @@ export function QuickQuoteDrawer({ isOpen, onClose, onNavigateToOrderForm }: Qui
               </div>
             ))
           ) : (
-            <div className="text-center py-12 text-[#8C7A78]">
-              <ShoppingBag className="w-12 h-12 mx-auto mb-3 text-[#EAE2D5]" aria-hidden="true" />
+            <div className="text-center py-12 text-[#777F56]">
+              <ShoppingBag className="w-12 h-12 mx-auto mb-3 text-[#EFE2C2]" aria-hidden="true" />
               <p className="text-sm font-medium">No saved quote drafts yet.</p>
               <p className="text-xs mt-1">Use our order form to configure custom pins, magnets, or mirrors.</p>
             </div>
@@ -119,15 +119,15 @@ export function QuickQuoteDrawer({ isOpen, onClose, onNavigateToOrderForm }: Qui
         </div>
 
         {/* Action Button */}
-        <div className="pt-4 border-t border-[#EAE2D5]">
+        <div className="pt-4 border-t border-[#EFE2C2]">
           <button
             onClick={() => {
               onNavigateToOrderForm();
               onClose();
             }}
-            className="w-full py-3.5 bg-[#C86D51] hover:bg-[#B25C42] text-white font-bold rounded-2xl shadow-md flex items-center justify-center space-x-2"
+            className="w-full py-3.5 bg-[#777F56] hover:bg-[#636B45] text-white font-bold rounded-2xl shadow-md flex items-center justify-center space-x-2"
           >
-            <Sparkles className="w-4 h-4" />
+            <Sparkles className="w-4 h-4 text-[#EFC257]" />
             <span>Create New Custom Order</span>
           </button>
         </div>

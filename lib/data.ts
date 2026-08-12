@@ -60,8 +60,8 @@ export const PRODUCTS: ProductItem[] = [
     ],
     shapes: ['65mm Round'],
     basePriceAED: 15,
-    badgeColor: 'bg-amber-100 text-amber-900 border-amber-300',
-    bgGradient: 'from-amber-50 to-orange-50',
+    badgeColor: 'bg-[#EFC257]/20 text-[#777F56] border-[#EFC257]',
+    bgGradient: 'from-[#EFE2C2]/40 to-[#EFC257]/20',
     image: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=800&auto=format&fit=crop'
   },
   {
@@ -82,8 +82,8 @@ export const PRODUCTS: ProductItem[] = [
     ],
     shapes: ['65mm Round', '58mm Square (Rounded Corners)', '50mm Square'],
     basePriceAED: 18,
-    badgeColor: 'bg-emerald-100 text-emerald-900 border-emerald-300',
-    bgGradient: 'from-emerald-50 to-teal-50',
+    badgeColor: 'bg-[#99A86F]/20 text-[#777F56] border-[#99A86F]',
+    bgGradient: 'from-[#EFE2C2]/40 to-[#99A86F]/20',
     image: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=800&auto=format&fit=crop'
   },
   {
@@ -103,8 +103,8 @@ export const PRODUCTS: ProductItem[] = [
     ],
     shapes: ['65mm Round'],
     basePriceAED: 22,
-    badgeColor: 'bg-rose-100 text-rose-900 border-rose-300',
-    bgGradient: 'from-rose-50 to-pink-50',
+    badgeColor: 'bg-[#E1A77A]/20 text-[#777F56] border-[#E1A77A]',
+    bgGradient: 'from-[#EFE2C2]/40 to-[#E1A77A]/20',
     image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800&auto=format&fit=crop'
   },
   {
@@ -124,8 +124,8 @@ export const PRODUCTS: ProductItem[] = [
     ],
     shapes: ['2×3 Grid (6 Pcs)', '3×3 Grid (9 Pcs)', '3×4 Grid (12 Pcs)', '4×4 Grid (16 Pcs)'],
     basePriceAED: 65,
-    badgeColor: 'bg-purple-100 text-purple-900 border-purple-300',
-    bgGradient: 'from-purple-50 to-indigo-50',
+    badgeColor: 'bg-[#777F56]/15 text-[#777F56] border-[#777F56]/40',
+    bgGradient: 'from-[#EFE2C2]/50 to-[#99A86F]/30',
     image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=800&auto=format&fit=crop'
   }
 ];

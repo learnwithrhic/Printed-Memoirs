@@ -14,10 +14,10 @@ export function HeroSection({ onNavigate, onOpenStudio }: HeroSectionProps) {
   const [selectedShape, setSelectedShape] = useState<string>('65mm Round');
 
   return (
-    <section id="hero" className="relative bg-[#FAF7F2] pt-8 pb-16 lg:pt-12 lg:pb-24 overflow-hidden border-b border-[#EAE2D5]/60">
+    <section id="hero" className="relative bg-[#FDFBF6] pt-8 pb-16 lg:pt-12 lg:pb-24 overflow-hidden border-b border-[#EFE2C2]/60">
       
       {/* Background Decorative Texture Elements */}
-      <div className="absolute inset-0 opacity-40 pointer-events-none bg-[radial-gradient(#C86D51_1px,transparent_1px)] [background-size:24px_24px]" />
+      <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#777F56_1px,transparent_1px)] [background-size:24px_24px]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -26,20 +26,20 @@ export function HeroSection({ onNavigate, onOpenStudio }: HeroSectionProps) {
           <div className="lg:col-span-7 flex flex-col text-left">
             
             {/* Top Pill Tag */}
-            <div className="inline-flex items-center space-x-2 bg-[#F3ECE2] border border-[#EAE2D5] px-3.5 py-1.5 rounded-full w-fit mb-6 shadow-2xs">
-              <span className="w-2 h-2 rounded-full bg-[#C86D51] animate-pulse" />
-              <span className="text-xs font-semibold text-[#4A3E3D] tracking-wide uppercase">
+            <div className="inline-flex items-center space-x-2 bg-[#EFE2C2]/50 border border-[#EFE2C2] px-3.5 py-1.5 rounded-full w-fit mb-6 shadow-2xs">
+              <span className="w-2 h-2 rounded-full bg-[#777F56] animate-pulse" />
+              <span className="text-xs font-semibold text-[#3B4029] tracking-wide uppercase">
                 Crafted in UAE • Custom Keepsakes & Bulk Merchandise
               </span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#362C2B] leading-[1.12] tracking-tight mb-6">
-              Turn Your Memories Into Something You Can <span className="italic font-serif font-normal text-[#C86D51] underline decoration-[#EAE2D5] decoration-wavy underline-offset-8">Keep</span>.
+            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#2D321F] leading-[1.12] tracking-tight mb-6">
+              Turn Your Memories Into Something You Can <span className="italic font-serif font-normal text-[#777F56] underline decoration-[#EFE2C2] decoration-wavy underline-offset-8">Keep</span>.
             </h1>
 
             {/* Subheading */}
-            <p className="text-base sm:text-lg lg:text-xl text-[#5C4D4A] max-w-2xl leading-relaxed mb-8 font-normal">
+            <p className="text-base sm:text-lg lg:text-xl text-[#4E553D] max-w-2xl leading-relaxed mb-8 font-normal">
               Personalized pins, magnets, and mirrors made from your favorite photos, artwork, logos, and special moments.
             </p>
 
@@ -47,40 +47,40 @@ export function HeroSection({ onNavigate, onOpenStudio }: HeroSectionProps) {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 mb-10">
               <button
                 onClick={() => onNavigate('shop')}
-                className="inline-flex items-center justify-center px-7 py-3.5 text-base font-semibold text-white bg-[#C86D51] hover:bg-[#B25C42] active:bg-[#9E4D36] rounded-full shadow-md hover:shadow-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C86D51] focus-visible:ring-offset-2 min-h-[48px]"
+                className="inline-flex items-center justify-center px-7 py-3.5 text-base font-semibold text-white bg-[#777F56] hover:bg-[#636B45] active:bg-[#4E5535] rounded-full shadow-md hover:shadow-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#777F56] focus-visible:ring-offset-2 min-h-[48px]"
               >
                 Shop Now
-                <ArrowRight className="w-5 h-5 ml-2" aria-hidden="true" />
+                <ArrowRight className="w-5 h-5 ml-2 text-[#EFC257]" aria-hidden="true" />
               </button>
 
               <button
                 onClick={() => onNavigate('custom-orders')}
-                className="inline-flex items-center justify-center px-7 py-3.5 text-base font-semibold text-[#362C2B] bg-[#F3ECE2] hover:bg-[#EAE2D5] border border-[#EAE2D5] rounded-full shadow-2xs hover:shadow transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C86D51] focus-visible:ring-offset-2 min-h-[48px]"
+                className="inline-flex items-center justify-center px-7 py-3.5 text-base font-semibold text-[#2D321F] bg-[#EFE2C2]/60 hover:bg-[#EFE2C2] border border-[#EFE2C2] rounded-full shadow-2xs hover:shadow transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#777F56] focus-visible:ring-offset-2 min-h-[48px]"
               >
-                <Sparkles className="w-5 h-5 mr-2 text-[#C86D51]" aria-hidden="true" />
+                <Sparkles className="w-5 h-5 mr-2 text-[#777F56]" aria-hidden="true" />
                 Create Your Custom Piece
               </button>
             </div>
 
             {/* Feature Highlights Bar */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-6 border-t border-[#EAE2D5]">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-6 border-t border-[#EFE2C2]">
               <div className="flex items-center space-x-2.5">
-                <div className="p-2 bg-[#F3ECE2] rounded-lg text-[#C86D51]">
+                <div className="p-2 bg-[#EFE2C2]/50 rounded-lg text-[#777F56]">
                   <CheckCircle2 className="w-4 h-4" aria-hidden="true" />
                 </div>
-                <span className="text-xs font-semibold text-[#4A3E3D]">No Min Order Required</span>
+                <span className="text-xs font-semibold text-[#3B4029]">No Min Order Required</span>
               </div>
               <div className="flex items-center space-x-2.5">
-                <div className="p-2 bg-[#F3ECE2] rounded-lg text-[#C86D51]">
+                <div className="p-2 bg-[#EFE2C2]/50 rounded-lg text-[#777F56]">
                   <Award className="w-4 h-4" aria-hidden="true" />
                 </div>
-                <span className="text-xs font-semibold text-[#4A3E3D]">Glossy Photo Clarity</span>
+                <span className="text-xs font-semibold text-[#3B4029]">Glossy Photo Clarity</span>
               </div>
               <div className="flex items-center space-x-2.5">
-                <div className="p-2 bg-[#F3ECE2] rounded-lg text-[#C86D51]">
+                <div className="p-2 bg-[#EFE2C2]/50 rounded-lg text-[#777F56]">
                   <Heart className="w-4 h-4" aria-hidden="true" />
                 </div>
-                <span className="text-xs font-semibold text-[#4A3E3D]">Bulk Discounts Available</span>
+                <span className="text-xs font-semibold text-[#3B4029]">Bulk Discounts Available</span>
               </div>
             </div>
 
@@ -90,18 +90,18 @@ export function HeroSection({ onNavigate, onOpenStudio }: HeroSectionProps) {
           <div className="lg:col-span-5 relative">
             
             {/* Visual Container Card */}
-            <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#EAE2D5] shadow-xl relative overflow-hidden">
+            <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#EFE2C2] shadow-xl relative overflow-hidden">
               
               {/* Product Type Switcher Tabs */}
-              <div className="flex p-1 bg-[#F3ECE2] rounded-2xl mb-6">
+              <div className="flex p-1 bg-[#EFE2C2]/50 rounded-2xl mb-6">
                 {PRODUCTS.map((prod) => (
                   <button
                     key={prod.id}
                     onClick={() => setSelectedProduct(prod.type)}
-                    className={`flex-1 py-2.5 text-xs sm:text-sm font-semibold rounded-xl transition-all duration-200 flex items-center justify-center space-x-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C86D51] ${
+                    className={`flex-1 py-2.5 text-xs sm:text-sm font-semibold rounded-xl transition-all duration-200 flex items-center justify-center space-x-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#777F56] ${
                       selectedProduct === prod.type
-                        ? 'bg-white text-[#C86D51] shadow-sm font-bold'
-                        : 'text-[#5C4D4A] hover:text-[#362C2B]'
+                        ? 'bg-white text-[#777F56] shadow-sm font-bold'
+                        : 'text-[#4E553D] hover:text-[#2D321F]'
                     }`}
                   >
                     <span>{prod.emoji}</span>
@@ -112,16 +112,16 @@ export function HeroSection({ onNavigate, onOpenStudio }: HeroSectionProps) {
 
               {/* Shape Switcher */}
               <div className="flex items-center justify-between mb-6 px-2">
-                <span className="text-xs font-medium uppercase tracking-wider text-[#8C7A78]">
-                  Select Shape
+                <span className="text-xs font-medium uppercase tracking-wider text-[#777F56]">
+                  Select Specification
                 </span>
-                <div className="inline-flex rounded-lg bg-[#FAF7F2] p-1 border border-[#EAE2D5]">
+                <div className="inline-flex rounded-lg bg-[#FDFBF6] p-1 border border-[#EFE2C2]">
                   <button
-                    onClick={() => setSelectedShape('Round')}
+                    onClick={() => setSelectedShape('65mm Round')}
                     className={`px-3 py-1 text-xs font-semibold rounded-md transition-colors ${
-                      selectedShape === 'Round'
-                        ? 'bg-[#C86D51] text-white shadow-2xs'
-                        : 'text-[#5C4D4A] hover:text-[#362C2B]'
+                      selectedShape.includes('Round')
+                        ? 'bg-[#777F56] text-white shadow-2xs'
+                        : 'text-[#4E553D] hover:text-[#2D321F]'
                     }`}
                   >
                     Round 🟢
@@ -129,24 +129,24 @@ export function HeroSection({ onNavigate, onOpenStudio }: HeroSectionProps) {
                   <button
                     onClick={() => setSelectedShape('Square')}
                     className={`px-3 py-1 text-xs font-semibold rounded-md transition-colors ${
-                      selectedShape === 'Square'
-                        ? 'bg-[#C86D51] text-white shadow-2xs'
-                        : 'text-[#5C4D4A] hover:text-[#362C2B]'
+                      selectedShape.includes('Square') || selectedShape.includes('Grid')
+                        ? 'bg-[#777F56] text-white shadow-2xs'
+                        : 'text-[#4E553D] hover:text-[#2D321F]'
                     }`}
                   >
-                    Square ⬛
+                    Square / Grid 🧩
                   </button>
                 </div>
               </div>
 
               {/* Dynamic 3D/Glossy Product Visual Representation */}
-              <div className="relative aspect-square w-full max-w-[320px] mx-auto flex items-center justify-center my-2 p-6 bg-gradient-to-br from-[#FAF7F2] to-[#F3ECE2] rounded-2xl border border-[#EAE2D5]/80 shadow-inner group">
+              <div className="relative aspect-square w-full max-w-[320px] mx-auto flex items-center justify-center my-2 p-6 bg-gradient-to-br from-[#FDFBF6] to-[#EFE2C2]/40 rounded-2xl border border-[#EFE2C2]/80 shadow-inner group">
                 
                 {/* Physical Product Replica Graphic */}
                 <div 
                   className={`relative transition-all duration-300 transform group-hover:scale-105 ${
-                    selectedShape === 'Round' ? 'rounded-full' : 'rounded-2xl'
-                  } w-52 h-52 bg-white shadow-2xl border-4 border-[#EAE2D5] flex flex-col items-center justify-center p-4 overflow-hidden text-center cursor-pointer`}
+                    selectedShape.includes('Round') ? 'rounded-full' : 'rounded-2xl'
+                  } w-52 h-52 bg-white shadow-2xl border-4 border-[#EFE2C2] flex flex-col items-center justify-center p-4 overflow-hidden text-center cursor-pointer`}
                   onClick={onOpenStudio}
                   title="Click to customize in Design Studio"
                 >
@@ -174,10 +174,11 @@ export function HeroSection({ onNavigate, onOpenStudio }: HeroSectionProps) {
                 </div>
 
                 {/* Backing Badge Indicator */}
-                <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-xs text-[#362C2B] border border-[#EAE2D5] text-[10px] font-semibold px-2.5 py-1 rounded-full shadow-2xs">
+                <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-xs text-[#2D321F] border border-[#EFE2C2] text-[10px] font-semibold px-2.5 py-1 rounded-full shadow-2xs">
                   {selectedProduct === 'pin' && '🛡️ Metal Safety Pin Backing'}
                   {selectedProduct === 'magnet' && '🧲 Strong Rubber Magnet'}
                   {selectedProduct === 'mirror' && '🪞 Crystal Clear Glass Back'}
+                  {selectedProduct === 'collage' && '🧩 Multi-Piece Magnet Set'}
                 </div>
 
               </div>
@@ -186,9 +187,9 @@ export function HeroSection({ onNavigate, onOpenStudio }: HeroSectionProps) {
               <div className="text-center mt-4">
                 <button
                   onClick={onOpenStudio}
-                  className="inline-flex items-center text-xs font-bold text-[#C86D51] hover:text-[#B25C42] underline underline-offset-4 cursor-pointer"
+                  className="inline-flex items-center text-xs font-bold text-[#777F56] hover:text-[#636B45] underline underline-offset-4 cursor-pointer"
                 >
-                  <Sparkles className="w-3.5 h-3.5 mr-1" aria-hidden="true" />
+                  <Sparkles className="w-3.5 h-3.5 mr-1 text-[#EFC257]" aria-hidden="true" />
                   Try your photo on this {selectedProduct} live →
                 </button>
               </div>
